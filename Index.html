@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Monthsary, My Love! ❤️</title>
+  <style>
+    :root {
+      --primary-color: #ff4b72;
+      --secondary-color: #ff85a2;
+      --bg-gradient: linear-gradient(135deg, #ffe6eb 0%, #ffd1dc 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Background Hearts */
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: rgba(255, 75, 114, 0.35);
+      font-size: 18px;
+      animation: float 6s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      z-index: 1;
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      margin-top: 20px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: clamp(0.85rem, 3vw, 1rem);
+      margin-bottom: 25px;
+    }
+
+    /* Envelope Letter */
+    .envelope-wrapper {
+      margin: 20px auto 30px auto;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 180px;
+      background: #ff6b8b;
+      position: relative;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 105px solid #ff4b72;
+      transform-origin: top;
+      transition: transform 0.5s ease;
+      z-index: 3;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .letter {
+      position: absolute;
+      top: 10px;
+      left: 5%;
+      width: 90%;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.5s ease;
+      z-index: 2;
+      max-height: 150px;
+      overflow: hidden;
+    }
+
+    .envelope.open .letter {
+      transform: translateY(-120px);
+      max-height: 1000px;
+      z-index: 4;
+      position: relative;
+      left: 0;
+      width: 100%;
+    }
+
+    .letter-content {
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    /* Photo Gallery */
+    .section-title {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin: 25px 0 15px 0;
+    }
+
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 10px 10px 15px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: rotate(-2deg);
+      transition: transform 0.2s;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid:hover {
+      transform: scale(1.04) rotate(0deg);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .polaroid p {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    /* Interactive Reasons Box */
+    .card-section {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .reason-box {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #333;
+      padding: 12px;
+      border: 2px dashed var(--secondary-color);
+      border-radius: 12px;
+      margin: 15px 0;
+      background: #fff;
+      transition: opacity 0.2s;
+    }
+
+    button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 75, 114, 0.3);
+      width: 100%;
+      max-width: 260px;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .tap-hint {
+      font-size: 0.8rem;
+      color: var(--primary-color);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="heart-bg" id="heartContainer"></div>
+
+  <div class="container">
+    <h1>Happy Monthsary, My Love! ✨</h1>
+    <p class="subtitle">Every single day with you is my favorite day.</p>
+
+    <!-- Interactive Envelope -->
+    <div class="envelope-wrapper" onclick="toggleEnvelope()">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="letter">
+          <div class="letter-content">
+            <p style="font-weight: bold; color: var(--primary-color); margin-bottom: 8px;">To My Favorite Person,</p>
+            <p>Happy Monthsary! Thank you for bringing so much warmth, laughter, and happiness into my life. Every moment spent with you since July 26 means the absolute world to me.</p>
+            <br>
+            <p>I am so lucky to have you by my side, and I can't wait to make countless more beautiful memories together. I love you so much!</p>
+            <br>
+            <p style="text-align: right; font-weight: bold;">Forever Yours ❤️</p>
+          </div>
+        </div>
+      </div>
+      <p class="tap-hint" id="envelopeHint">💌 Tap the envelope to open your letter</p>
+    </div>
+
+    <!-- Polaroid Gallery with Pictures -->
+    <h2 class="section-title">Our Memories 📸</h2>
+    <div class="polaroid-grid">
+      <div class="polaroid">
+        <img src="Messenger_creation_7202C575-AD16-4995-9130-38A0A6DD673E.jpeg" alt="Sweet Moments">
+        <p>Sweet Memories 💕</p>
+      </div>
+      <div class="polaroid">
+        <img src="1b34c501-8a20-49de-9e0c-fa829d2d9b4d.png" alt="Our Journey">
+        <p>My Favorite Person 💖</p>
+      </div>
+    </div>
+
+    <!-- Interactive Reasons Deck -->
+    <div class="card-section">
+      <h2 style="color: var(--primary-color); font-size: 1.1rem;">Reasons Why I Love You</h2>
+      <div class="reason-box" id="reasonText">
+        Tap the button below! 💖
+      </div>
+      <button onclick="nextReason()">Tap For A Reason 💝</button>
+    </div>
+  </div>
+
+  <script>
+    // Envelope toggle logic
+    function toggleEnvelope() {
+      const envelope = document.getElementById('envelope');
+      const hint = document.getElementById('envelopeHint');
+      envelope.classList.toggle('open');
+      if (envelope.classList.contains('open')) {
+        hint.textContent = "💖 Tap again to close";
+      } else {
+        hint.textContent = "💌 Tap the envelope to open your letter";
+      }
+    }
+
+    // Reasons List
+    const reasons = [
+      "The way your eyes light up whenever you're happy. ✨",
+      "How you always know exactly how to make me smile.",
+      "Your gentle heart and how caring you are.",
+      "The cozy feeling I get every time I hold your hand.",
+      "Your cute laughter that instantly brightens my day.",
+      "How you support and believe in me, always.",
+      "Simply because being with you feels like home. ❤️"
+    ];
+
+    let currentReason = -1;
+
+    function nextReason() {
+      currentReason = (currentReason + 1) % reasons.length;
+      const textElement = document.getElementById('reasonText');
+      textElement.style.opacity = 0;
+      setTimeout(() => {
+        textElement.textContent = reasons[currentReason];
+        textElement.style.opacity = 1;
+      }, 200);
+    }
+
+    // Floating heart generator
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.style.fontSize = Math.random() * 12 + 14 + 'px';
+      
+      document.getElementById('heartContainer').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 450);
+  </script>
+</body>
+</html>
